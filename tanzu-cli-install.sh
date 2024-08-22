@@ -6,3 +6,4 @@ tanzu config eula accept
 tanzu plugin install --group vmware-tanzu/app-developer
 tanzu plugin install build --version v0.9.2
 
+#tanzu login
