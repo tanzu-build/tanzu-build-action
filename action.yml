@@ -1,0 +1,29 @@
+# action.yml
+name: 'Tanzu Build'
+description: 'Build an application with tanzu build cli'
+inputs:
+  container_registry:
+    description: 'Registry you will push images to (e.g. myrepo.azurecr.io/build/{name}'
+    required: true
+    default: ''
+  buildPlanSource:
+    description: '(Optional) Name of th fil containing the build plan'
+    required: false
+    default: './platform-config.yaml'
+  javaVersion:
+    description: 'JVM version to be used for Java workloads'
+    required: false
+    default: '17'
+#outputs:
+#  time: # id of output
+#    description: 'The time we greeted you'
+runs:
+  using: 'composite'
+  steps:
+    - name: Build Application
+      run: ${{ github.action_path }}/build-app.sh
+      shell: bash
+      env:
+        CONTAINER_REGISTRY: ${{ inputs.container_registry }}
+        BUILD_PLAN_SOURCE: ${{ inputs.buildPlanSource }}
+        JAVA_VERSION: ${{ inputs.javaVersion }}
