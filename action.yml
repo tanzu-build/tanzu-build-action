@@ -20,6 +20,9 @@ inputs:
 runs:
   using: 'composite'
   steps:
+    - name: Intall tanzu cli
+      run: ${{ github.action_path }}/tanzu-cli-install.sh
+      shell: bash
     - name: Build Application
       run: ${{ github.action_path }}/build-app.sh
       shell: bash
